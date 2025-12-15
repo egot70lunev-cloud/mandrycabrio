@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { getLocaleFromPathname } from '@/lib/i18n';
@@ -13,7 +13,7 @@ const languages = locales.map((code) => ({
   name: localeNames[code],
 }));
 
-export function LanguageSwitcher() {
+function LanguageSwitcherContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentLocale = getLocaleFromPathname(pathname);
@@ -120,6 +120,18 @@ export function LanguageSwitcher() {
         )}
       </div>
     </>
+  );
+}
+
+export function LanguageSwitcher() {
+  return (
+    <Suspense fallback={
+      <div className="hidden md:flex items-center gap-1">
+        <div className="px-2 py-1 rounded text-xs font-medium bg-[var(--surface-2)] text-[var(--text-muted)]">EN</div>
+      </div>
+    }>
+      <LanguageSwitcherContent />
+    </Suspense>
   );
 }
 

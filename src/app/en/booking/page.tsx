@@ -2,8 +2,6 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-
-export const dynamic = 'force-dynamic';
 import { cars } from '@/data/cars';
 import { calcTotalPrice } from '@/lib/pricing';
 import { formatEUR } from '@/lib/format';
