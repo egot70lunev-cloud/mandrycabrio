@@ -1,0 +1,41 @@
+{
+  "common": {
+    "siteName": "MandryCabrio",
+    "tagline": "Premium Autovermietung auf Teneriffa"
+  },
+  "nav": {
+    "cars": "Autos",
+    "terms": "Bedingungen",
+    "contact": "Kontakt",
+    "whatsapp": "WhatsApp"
+  },
+  "home": {
+    "title": "Premium Autovermietung auf Teneriffa",
+    "subtitle": "Erleben Sie Luxus-Autovermietung mit unserer Premium-Sammlung",
+    "browseCars": "Autos durchsuchen",
+    "learnMore": "Mehr erfahren"
+  },
+  "cars": {
+    "title": "Unsere Flotte",
+    "subtitle": "Entdecken Sie unsere Premium-Sammlung",
+    "viewDetails": "Details anzeigen",
+    "book": "Buchen"
+  },
+  "booking": {
+    "title": "Buchung abschließen",
+    "subtitle": "Füllen Sie Ihre Daten aus, um Ihre Buchungsanfrage abzuschließen"
+  },
+  "search": {
+    "title": "Suchergebnisse",
+    "noResults": "Keine Autos für diese Daten verfügbar.",
+    "editSearch": "Suche bearbeiten",
+    "backToSearch": "Zurück zur Suche"
+  },
+  "terms": {
+    "title": "Allgemeine Geschäftsbedingungen",
+    "description": "Allgemeine Geschäftsbedingungen für die Autovermietung von MandryCabrio auf Teneriffa. Lesen Sie unsere Richtlinien zu Kautionen, Versicherungen und Zusatzleistungen."
+  }
+}
+
+
+

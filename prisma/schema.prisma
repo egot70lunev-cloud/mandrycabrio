@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  carSlug         String
+  startAt         DateTime
+  endAt           DateTime
+  pickupLocation  String
+  dropoffLocation String
+  name            String
+  email           String
+  phone           String
+  whatsapp        String?
+  flightNumber    String?
+  extrasJson      String?       // JSON string of selected extras and pricing
+  extrasTotal     Int?          // Total price of extras (null if by agreement)
+  status          BookingStatus @default(PENDING)
+  createdAt       DateTime      @default(now())
+
+  @@index([carSlug])
+  @@index([startAt, endAt])
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  name       String
+  rating     Int      // 1-5
+  comment    String
+  carSlug    String?  // nullable: null for general reviews, slug for car-specific reviews
+  language   String   @default("en") // "en" | "es"
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([isApproved])
+  @@index([carSlug])
+  @@index([language])
+}

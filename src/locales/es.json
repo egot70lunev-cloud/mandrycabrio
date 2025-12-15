@@ -1,0 +1,41 @@
+{
+  "common": {
+    "siteName": "MandryCabrio",
+    "tagline": "Alquiler de Coches Premium en Tenerife"
+  },
+  "nav": {
+    "cars": "Coches",
+    "terms": "Términos",
+    "contact": "Contacto",
+    "whatsapp": "WhatsApp"
+  },
+  "home": {
+    "title": "Alquiler de Coches Premium en Tenerife",
+    "subtitle": "Disfruta del alquiler de coches de lujo con nuestra colección premium",
+    "browseCars": "Ver Coches",
+    "learnMore": "Saber Más"
+  },
+  "cars": {
+    "title": "Nuestra Flota",
+    "subtitle": "Descubre nuestra colección premium",
+    "viewDetails": "Ver detalles",
+    "book": "Reservar"
+  },
+  "booking": {
+    "title": "Completa Tu Reserva",
+    "subtitle": "Rellena tus datos para completar tu solicitud de reserva"
+  },
+  "search": {
+    "title": "Resultados de Búsqueda",
+    "noResults": "No hay coches disponibles para estas fechas.",
+    "editSearch": "Modificar búsqueda",
+    "backToSearch": "Volver a búsqueda"
+  },
+  "terms": {
+    "title": "Términos y Condiciones",
+    "description": "Términos y condiciones de alquiler de MandryCabrio en Tenerife. Lee nuestras políticas sobre depósitos, seguros y servicios adicionales."
+  }
+}
+
+
+

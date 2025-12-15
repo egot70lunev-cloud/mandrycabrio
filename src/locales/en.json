@@ -1,0 +1,31 @@
+{
+  "common": {
+    "siteName": "MandryCabrio",
+    "tagline": "Premium Car Rental in Tenerife"
+  },
+  "nav": {
+    "cars": "Cars",
+    "terms": "Terms",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp"
+  },
+  "home": {
+    "title": "Premium Car Rental in Tenerife",
+    "subtitle": "Experience luxury car rental with our premium collection",
+    "browseCars": "Browse Cars",
+    "learnMore": "Learn More"
+  },
+  "cars": {
+    "title": "Our Fleet",
+    "subtitle": "Discover our premium collection",
+    "viewDetails": "View details",
+    "book": "Book"
+  },
+  "booking": {
+    "title": "Complete Your Booking",
+    "subtitle": "Fill in your details to complete your booking request"
+  }
+}
+
+
+
