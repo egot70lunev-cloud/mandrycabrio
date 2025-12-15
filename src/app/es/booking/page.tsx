@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+
 import { cars } from '@/data/cars';
 import { calcTotalPrice } from '@/lib/pricing';
 import { formatEUR } from '@/lib/format';
@@ -25,7 +26,7 @@ const locationLabels: Record<string, string> = {
 
 type BookingState = 'idle' | 'loading' | 'success' | 'error';
 
-export default function BookingPage() {
+function BookingPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -983,6 +984,14 @@ export default function BookingPage() {
         </div>
       </Modal>
     </>
+  );
+}
+
+export default function BookingPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[var(--navy-deep)] flex items-center justify-center"><p className="text-[var(--text)]">Loading...</p></div>}>
+      <BookingPageContent />
+    </Suspense>
   );
 }
 

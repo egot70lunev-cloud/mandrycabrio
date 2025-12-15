@@ -31,7 +31,7 @@ export default function Home() {
       />
       
       {/* Hero Section with Search */}
-      <Section background="surface" padding="none" className="relative overflow-hidden hero-gradient">
+      <Section background="surface" padding="lg" className="relative overflow-hidden hero-gradient">
         <div className="relative min-h-[600px] md:min-h-[700px] flex items-center">
           {/* Hero Background Image */}
           <HeroImage priority />

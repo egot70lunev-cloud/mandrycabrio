@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { getCarImageAlt, getCarImageSrc, type Locale } from '@/lib/imageAlt';
+import { getCarImageAlt, getCarImageSrc } from '@/lib/imageAlt';
+import type { Locale } from '@/lib/i18n/locales';
 import type { Car } from '@/data/cars';
 
 type CarImageProps = {
