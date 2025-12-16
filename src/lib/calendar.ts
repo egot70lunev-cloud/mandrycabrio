@@ -104,15 +104,18 @@ export async function createBookingEvent(
     console.log('[CALENDAR] Skipped: GOOGLE_CALENDAR_ID not set');
     return { status: 'skipped', error: 'missing_calendar_id' };
   }
-  if (!env.googleServiceAccountEmail || !env.googleServiceAccountPrivateKey) {
+  const { loadServiceAccountKey } = require('./env');
+  const serviceAccount = loadServiceAccountKey();
+  
+  if (!serviceAccount) {
     console.log('[CALENDAR] Skipped: service account envs missing');
     return { status: 'skipped', error: 'missing_service_account_envs' };
   }
 
   try {
     const auth = new google.auth.JWT({
-      email: env.googleServiceAccountEmail,
-      key: normalizePrivateKey(env.googleServiceAccountPrivateKey),
+      email: serviceAccount.client_email,
+      key: serviceAccount.private_key,
       scopes: ['https://www.googleapis.com/auth/calendar'],
     });
 

@@ -138,7 +138,7 @@ export async function GET() {
           errorMessage,
           errorCode,
           errorDetails: {
-            ...errorDetails,
+            ...(errorDetails && typeof errorDetails === 'object' ? errorDetails : {}),
             serviceAccountEmail: serviceAccount.client_email,
           },
         },

@@ -21,6 +21,7 @@ export async function GET() {
     const endDate = new Date(startDate.getTime() + 30 * 60 * 1000); // 30 minutes duration
 
     const result = await createBookingEvent({
+      bookingId: 'test-booking-1',
       carName: 'Test Car',
       customerName: 'Test Customer',
       customerPhone: '+34600000000',

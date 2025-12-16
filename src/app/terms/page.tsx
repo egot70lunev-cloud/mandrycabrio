@@ -69,9 +69,9 @@ export default function TermsPage() {
           </Card>
 
           <Card>
-            <h2 className="text-2xl font-semibold text-[#2B2B2B] mb-4">{t('payment.methodsTitle', locale)}</h2>
+            <h2 className="text-2xl font-semibold text-[#2B2B2B] mb-4">Payment Methods</h2>
             <p className="text-[#6B6B6B]">
-              {t('payment.methodsDescription', locale)}
+              We accept bank transfer, credit card, cash, Apple Pay, and Google Pay. Prepayment of €100 is required to confirm your booking. The remaining balance plus deposit will be collected on pickup.
             </p>
           </Card>
 

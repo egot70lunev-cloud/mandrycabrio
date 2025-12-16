@@ -16,7 +16,7 @@ export async function createCalendarEvent(
   car: Car,
   pricingSummary: PricingSummary
 ): Promise<void> {
-  if (!env.googleCalendarId || !env.googleServiceAccountJson) {
+  if (!env.googleCalendarId || !env.googleServiceAccountKey) {
     console.log('[GCAL] Would create calendar event:', {
       title: `${booking.status} — ${car.name} — ${booking.name}`,
       start: booking.startAt,
@@ -29,7 +29,7 @@ export async function createCalendarEvent(
   try {
     // TODO: Implement Google Calendar API integration
     // const { google } = require('googleapis');
-    // const serviceAccount = JSON.parse(env.googleServiceAccountJson);
+    // const serviceAccount = JSON.parse(env.googleServiceAccountKey);
     // const auth = new google.auth.JWT(
     //   serviceAccount.client_email,
     //   null,

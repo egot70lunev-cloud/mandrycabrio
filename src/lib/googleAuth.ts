@@ -5,9 +5,11 @@
 
 import { google } from 'googleapis';
 import { loadServiceAccountKey } from './env';
+import type { JWT } from 'google-auth-library';
+import type { calendar_v3 } from 'googleapis';
 
-export type GoogleAuth = ReturnType<typeof google.auth.JWT>;
-export type CalendarClient = ReturnType<typeof google.calendar>;
+export type GoogleAuth = JWT;
+export type CalendarClient = calendar_v3.Calendar;
 
 /**
  * Get Google JWT authentication instance
