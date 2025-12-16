@@ -13,19 +13,151 @@
     "title": "Premium Car Rental in Tenerife",
     "subtitle": "Experience luxury car rental with our premium collection",
     "browseCars": "Browse Cars",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "availableViaWhatsApp": "Available via WhatsApp for any assistance"
   },
   "cars": {
     "title": "Our Fleet",
     "subtitle": "Discover our premium collection",
     "viewDetails": "View details",
-    "book": "Book"
+    "book": "Book",
+    "category": {
+      "all": "All",
+      "cabrio": "Cabrio",
+      "suv": "SUV",
+      "economy": "Economy",
+      "ev": "EV",
+      "motorcycle": "Motorcycle",
+      "luxury": "Luxury"
+    },
+    "sort": {
+      "recommended": "Recommended",
+      "priceLow": "Price (low to high)",
+      "priceHigh": "Price (high to low)",
+      "depositLow": "Deposit (low to high)"
+    }
+  },
+  "search": {
+    "title": "Search your Car",
+    "resultsTitle": "Search Results",
+    "noResults": "No cars available for these dates.",
+    "editSearch": "Edit search",
+    "backToSearch": "Back to search",
+    "modifySearch": "Modify search",
+    "invalidDates": "Invalid dates. Please check your search parameters.",
+    "invalidParams": "Invalid search parameters",
+    "category": "Category",
+    "summary": "Search Summary"
+  },
+  "form": {
+    "pickupLocation": "Pickup location",
+    "dropoffLocation": "Dropoff location",
+    "pickupDate": "Pickup date",
+    "pickupTime": "Pickup time",
+    "returnDate": "Return date",
+    "returnTime": "Return time",
+    "category": "Category",
+    "any": "Any",
+    "search": "Search",
+    "selectBothDates": "Please select both pickup and return dates",
+    "invalidDateFormat": "Invalid date format",
+    "returnAfterPickup": "Return date and time must be after pickup date and time",
+    "fullName": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "whatsappOptional": "WhatsApp (optional)",
+    "flightNumberOptional": "Flight number (optional)",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "selectRentalDetails": "Select Rental Details",
+    "chooseDatesLocations": "Choose your pickup and return dates and locations."
   },
   "booking": {
     "title": "Complete Your Booking",
-    "subtitle": "Fill in your details to complete your booking request"
+    "subtitle": "Fill in your details to complete your booking request",
+    "selectRentalDetails": "Select Rental Details",
+    "chooseDatesLocations": "Choose your pickup and return dates and locations.",
+    "pricing": "Pricing:",
+    "deposit": "Deposit:",
+    "bookingSummary": "Booking Summary",
+    "car": "Car:",
+    "dates": "Dates:",
+    "pickup": "Pickup:",
+    "dropoff": "Dropoff:",
+    "days": "day",
+    "daysPlural": "days",
+    "extras": "Extras:",
+    "extrasTotal": "Extras total:",
+    "rentalTotal": "Rental total:",
+    "totalInclExtras": "Total (incl. extras):",
+    "extraServices": "Extra Services",
+    "acceptTerms": "I accept the rental terms and conditions",
+    "viewTerms": "(View terms)",
+    "whatYouAgree": "What you agree to (summary)",
+    "downloadPdf": "Download PDF",
+    "editDates": "Edit dates",
+    "noCarSelected": "No Car Selected",
+    "selectCarToStart": "Please select a car to start your booking.",
+    "backToCars": "Back to cars",
+    "carNotFound": "Car not found",
+    "bookingRequestSent": "Booking Request Sent!",
+    "bookingId": "Booking ID:",
+    "nextSteps": "Next Steps",
+    "contactWhatsApp": "For any questions or special requests, please contact us on WhatsApp:",
+    "backToSearch": "Back to search"
+  },
+  "extras": {
+    "childSeat": {
+      "label": "Child seat / bassinet / booster",
+      "description": "Free child seat, bassinet, or booster seat for your rental",
+      "free": "(free)"
+    },
+    "secondDriverSouth": {
+      "label": "Second driver — South (€30)",
+      "description": "Additional driver authorization for South zone (South Airport TFS, Los Cristianos)"
+    },
+    "secondDriverNorth": {
+      "label": "Second driver — North (€80)",
+      "description": "Additional driver authorization for North zone (North Airport TFN, Puerto de la Cruz, Santa Cruz)"
+    },
+    "islandDelivery": {
+      "label": "Delivery / pickup across the island",
+      "description": "Delivery and pickup service across Tenerife (by agreement)",
+      "byAgreement": "(by agreement)",
+      "confirmPrice": "We will confirm the price on WhatsApp"
+    }
+  },
+  "locations": {
+    "northAirportTfn": "North Airport (TFN)",
+    "southAirportTfs": "South Airport (TFS)",
+    "puertoDeLaCruz": "Puerto de la Cruz",
+    "santaCruz": "Santa Cruz",
+    "losCristianos": "Los Cristianos",
+    "other": "Other (by agreement)"
+  },
+  "terms": {
+    "title": "Terms and Conditions",
+    "description": "Terms and conditions for MandryCabrio car rental in Tenerife. Read our policies on deposits, insurance, and additional services."
+  },
+  "payment": {
+    "title": "Payment Methods Accepted",
+    "description": "To confirm a booking, a €100 prepayment is required. The remaining rental fee and deposit are paid on pickup.",
+    "descriptionCompact": "To confirm your booking, a €100 prepayment is required. The remaining rental fee and deposit are paid on pickup.",
+    "methodsTitle": "Payment Methods",
+    "methodsDescription": "We accept Privat24, Mono, USDT, Santander, BBVA, and Caixa. Apple Pay link available on request.",
+    "methodsList": "Payment methods: Privat24 / Mono / USDT / Santander / BBVA / Caixa",
+    "applePayNote": "Apple Pay link available on request",
+    "methods": {
+      "cash": "Cash",
+      "cashOnPickup": "(on pickup)",
+      "bankTransfer": "Bank Transfer",
+      "bankTransferBanks": "(Santander / BBVA / Caixa)",
+      "usdt": "USDT",
+      "usdtCrypto": "(crypto)",
+      "privat24Monobank": "Privat24 / Monobank",
+      "privat24MonobankUah": "(UAH)",
+      "applePay": "Apple Pay",
+      "applePayOnRequest": "(on request)"
+    }
   }
 }
-
-
-

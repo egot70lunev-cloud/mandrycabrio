@@ -14,3 +14,4 @@ export function formatEUR(value: number): string {
 
 
 
+

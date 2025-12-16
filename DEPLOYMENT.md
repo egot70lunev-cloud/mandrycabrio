@@ -77,3 +77,4 @@ The project is ready to be pushed to GitHub. To create the repository and push:
 - Database migrations run automatically via Prisma
 - Static assets are served from `/public` directory
 
+

@@ -13,29 +13,151 @@
     "title": "Premium Autovermietung auf Teneriffa",
     "subtitle": "Erleben Sie Luxus-Autovermietung mit unserer Premium-Sammlung",
     "browseCars": "Autos durchsuchen",
-    "learnMore": "Mehr erfahren"
+    "learnMore": "Mehr erfahren",
+    "availableViaWhatsApp": "Erhältlich über WhatsApp für jede Unterstützung"
   },
   "cars": {
     "title": "Unsere Flotte",
     "subtitle": "Entdecken Sie unsere Premium-Sammlung",
     "viewDetails": "Details anzeigen",
-    "book": "Buchen"
+    "book": "Buchen",
+    "category": {
+      "all": "Alle",
+      "cabrio": "Cabrio",
+      "suv": "SUV",
+      "economy": "Economy",
+      "ev": "Elektro",
+      "motorcycle": "Motorrad",
+      "luxury": "Luxus"
+    },
+    "sort": {
+      "recommended": "Empfohlen",
+      "priceLow": "Preis (niedrig bis hoch)",
+      "priceHigh": "Preis (hoch bis niedrig)",
+      "depositLow": "Kaution (niedrig bis hoch)"
+    }
+  },
+  "search": {
+    "title": "Suchen Sie Ihr Auto",
+    "resultsTitle": "Suchergebnisse",
+    "noResults": "Keine Autos für diese Daten verfügbar.",
+    "editSearch": "Suche bearbeiten",
+    "backToSearch": "Zurück zur Suche",
+    "modifySearch": "Suche ändern",
+    "invalidDates": "Ungültige Daten. Bitte überprüfen Sie Ihre Suchparameter.",
+    "invalidParams": "Ungültige Suchparameter",
+    "category": "Kategorie",
+    "summary": "Suchzusammenfassung"
+  },
+  "form": {
+    "pickupLocation": "Abholort",
+    "dropoffLocation": "Rückgabeort",
+    "pickupDate": "Abholdatum",
+    "pickupTime": "Abholzeit",
+    "returnDate": "Rückgabedatum",
+    "returnTime": "Rückgabezeit",
+    "category": "Kategorie",
+    "any": "Beliebig",
+    "search": "Suchen",
+    "selectBothDates": "Bitte wählen Sie sowohl Abhol- als auch Rückgabedatum",
+    "invalidDateFormat": "Ungültiges Datumsformat",
+    "returnAfterPickup": "Rückgabedatum und -zeit müssen nach Abholdatum und -zeit liegen",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "whatsappOptional": "WhatsApp (optional)",
+    "flightNumberOptional": "Flugnummer (optional)",
+    "submit": "Absenden",
+    "loading": "Laden...",
+    "selectRentalDetails": "Mietdetails auswählen",
+    "chooseDatesLocations": "Wählen Sie Ihre Abhol- und Rückgabedaten und -orte."
   },
   "booking": {
     "title": "Buchung abschließen",
-    "subtitle": "Füllen Sie Ihre Daten aus, um Ihre Buchungsanfrage abzuschließen"
-  },
-  "search": {
-    "title": "Suchergebnisse",
-    "noResults": "Keine Autos für diese Daten verfügbar.",
-    "editSearch": "Suche bearbeiten",
+    "subtitle": "Bitte füllen Sie Ihre Daten aus, um Ihre Buchungsanfrage abzuschließen.",
+    "selectRentalDetails": "Mietdetails auswählen",
+    "chooseDatesLocations": "Wählen Sie Ihre Abhol- und Rückgabedaten und -orte.",
+    "pricing": "Preise:",
+    "deposit": "Kaution:",
+    "bookingSummary": "Buchungszusammenfassung",
+    "car": "Auto:",
+    "dates": "Daten:",
+    "pickup": "Abholung:",
+    "dropoff": "Rückgabe:",
+    "days": "Tag",
+    "daysPlural": "Tage",
+    "extras": "Extras:",
+    "extrasTotal": "Extras gesamt:",
+    "rentalTotal": "Miete gesamt:",
+    "totalInclExtras": "Gesamt (inkl. Extras):",
+    "extraServices": "Zusatzleistungen",
+    "acceptTerms": "Ich akzeptiere die Mietbedingungen",
+    "viewTerms": "(Bedingungen anzeigen)",
+    "whatYouAgree": "Worauf Sie sich einlassen (Zusammenfassung)",
+    "downloadPdf": "PDF herunterladen",
+    "editDates": "Daten bearbeiten",
+    "noCarSelected": "Kein Auto ausgewählt",
+    "selectCarToStart": "Bitte wählen Sie ein Auto aus, um Ihre Buchung zu beginnen.",
+    "backToCars": "Zurück zu Autos",
+    "carNotFound": "Auto nicht gefunden",
+    "bookingRequestSent": "Buchungsanfrage gesendet!",
+    "bookingId": "Buchungs-ID:",
+    "nextSteps": "Nächste Schritte",
+    "contactWhatsApp": "Bei Fragen oder besonderen Wünschen kontaktieren Sie uns bitte per WhatsApp:",
     "backToSearch": "Zurück zur Suche"
+  },
+  "extras": {
+    "childSeat": {
+      "label": "Kindersitz / Babyschale / Sitzerhöhung",
+      "description": "Kostenloser Kindersitz, Babyschale oder Sitzerhöhung für Ihre Miete",
+      "free": "(kostenlos)"
+    },
+    "secondDriverSouth": {
+      "label": "Zweiter Fahrer — Süden (€30)",
+      "description": "Zusätzliche Fahrergenehmigung für Südzone (Südflughafen TFS, Los Cristianos)"
+    },
+    "secondDriverNorth": {
+      "label": "Zweiter Fahrer — Norden (€80)",
+      "description": "Zusätzliche Fahrergenehmigung für Nordzone (Nordflughafen TFN, Puerto de la Cruz, Santa Cruz)"
+    },
+    "islandDelivery": {
+      "label": "Lieferung / Abholung auf der ganzen Insel",
+      "description": "Liefer- und Abholservice auf ganz Teneriffa (nach Vereinbarung)",
+      "byAgreement": "(nach Vereinbarung)",
+      "confirmPrice": "Wir bestätigen den Preis per WhatsApp"
+    }
+  },
+  "locations": {
+    "northAirportTfn": "Nordflughafen (TFN)",
+    "southAirportTfs": "Südflughafen (TFS)",
+    "puertoDeLaCruz": "Puerto de la Cruz",
+    "santaCruz": "Santa Cruz",
+    "losCristianos": "Los Cristianos",
+    "other": "Andere (nach Vereinbarung)"
   },
   "terms": {
     "title": "Allgemeine Geschäftsbedingungen",
     "description": "Allgemeine Geschäftsbedingungen für die Autovermietung von MandryCabrio auf Teneriffa. Lesen Sie unsere Richtlinien zu Kautionen, Versicherungen und Zusatzleistungen."
+  },
+  "payment": {
+    "title": "Akzeptierte Zahlungsmethoden",
+    "description": "Zur Bestätigung einer Buchung ist eine Vorauszahlung von €100 erforderlich. Die restliche Mietgebühr und Kaution werden bei Abholung gezahlt.",
+    "descriptionCompact": "Zur Bestätigung Ihrer Buchung ist eine Vorauszahlung von €100 erforderlich. Die restliche Mietgebühr und Kaution werden bei Abholung gezahlt.",
+    "methodsTitle": "Zahlungsmethoden",
+    "methodsDescription": "Wir akzeptieren Privat24, Mono, USDT, Santander, BBVA und Caixa. Apple Pay-Link auf Anfrage verfügbar.",
+    "methodsList": "Zahlungsmethoden: Privat24 / Mono / USDT / Santander / BBVA / Caixa",
+    "applePayNote": "Apple Pay-Link auf Anfrage verfügbar",
+    "methods": {
+      "cash": "Bargeld",
+      "cashOnPickup": "(bei Abholung)",
+      "bankTransfer": "Banküberweisung",
+      "bankTransferBanks": "(Santander / BBVA / Caixa)",
+      "usdt": "USDT",
+      "usdtCrypto": "(Krypto)",
+      "privat24Monobank": "Privat24 / Monobank",
+      "privat24MonobankUah": "(UAH)",
+      "applePay": "Apple Pay",
+      "applePayOnRequest": "(auf Anfrage)"
+    }
   }
 }
-
-
-

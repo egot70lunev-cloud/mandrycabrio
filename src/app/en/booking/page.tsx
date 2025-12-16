@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { cars } from '@/data/cars';
 import { calcTotalPrice } from '@/lib/pricing';
 import { formatEUR } from '@/lib/format';
@@ -13,25 +13,32 @@ import { Modal } from '@/components/ui/Modal';
 import { PaymentMethodsBlock } from '@/components/PaymentMethodsBlock';
 import Link from 'next/link';
 import type { Car } from '@/data/cars';
+import { t, getLocaleFromPathname } from '@/lib/i18n';
 // Note: Metadata for client components is handled via layout.tsx or parent server component
 
-const locationLabels: Record<string, string> = {
-  'north-airport-tfn': 'North Airport (TFN)',
-  'south-airport-tfs': 'South Airport (TFS)',
-  'puerto-de-la-cruz': 'Puerto de la Cruz',
-  'santa-cruz': 'Santa Cruz',
-  'los-cristianos': 'Los Cristianos',
-  'other': 'Other (by agreement)',
-};
+function getLocationLabels(locale: string): Record<string, string> {
+  return {
+    'north-airport-tfn': t('locations.northAirportTfn', locale),
+    'south-airport-tfs': t('locations.southAirportTfs', locale),
+    'puerto-de-la-cruz': t('locations.puertoDeLaCruz', locale),
+    'santa-cruz': t('locations.santaCruz', locale),
+    'los-cristianos': t('locations.losCristianos', locale),
+    'other': t('locations.other', locale),
+  };
+}
 
 type BookingState = 'idle' | 'loading' | 'success' | 'error';
 
 function BookingPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   
   const query = parseBookingQuery(Object.fromEntries(searchParams.entries()));
   const isComplete = isCompleteBookingQuery(query);
+  
+  const locationLabels = getLocationLabels(locale);
 
   const [car, setCar] = useState<Car | null>(null);
   const [pricing, setPricing] = useState<ReturnType<typeof calcTotalPrice> | null>(null);
@@ -100,7 +107,7 @@ function BookingPageContent() {
     setDateFormError(null);
     
     if (!pickupDate || !returnDate) {
-      setDateFormError('Please select both pickup and return dates');
+      setDateFormError(t('form.selectBothDates', locale));
       return;
     }
 
@@ -108,12 +115,12 @@ function BookingPageContent() {
     const returnDateTime = new Date(`${returnDate}T${returnTime}`);
 
     if (isNaN(pickupDateTime.getTime()) || isNaN(returnDateTime.getTime())) {
-      setDateFormError('Invalid date format');
+      setDateFormError(t('form.invalidDateFormat', locale));
       return;
     }
 
     if (returnDateTime <= pickupDateTime) {
-      setDateFormError('Return date and time must be after pickup date and time');
+      setDateFormError(t('form.returnAfterPickup', locale));
       return;
     }
 
@@ -193,14 +200,14 @@ function BookingPageContent() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-[var(--text)] mb-2">No Car Selected</h1>
+            <h1 className="text-3xl font-bold text-[var(--text)] mb-2">{t('booking.noCarSelected', locale)}</h1>
             <p className="text-[var(--text-muted)] mb-6">
-              Please select a car to start your booking.
+              {t('booking.selectCarToStart', locale)}
             </p>
           </div>
-          <Link href="/en/cars">
+          <Link href={`/${locale}/cars`}>
             <Button variant="primary" size="lg">
-              Browse Cars
+              {t('home.browseCars', locale)}
             </Button>
           </Link>
         </div>
@@ -213,9 +220,9 @@ function BookingPageContent() {
     return (
       <Section background="primary" padding="lg">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-xl text-[var(--accent)] mb-4">{error || 'Car not found'}</p>
-          <Link href="/en/cars">
-            <Button variant="outline">Back to cars</Button>
+          <p className="text-xl text-[var(--accent)] mb-4">{error || t('booking.carNotFound', locale)}</p>
+          <Link href={`/${locale}/cars`}>
+            <Button variant="outline">{t('booking.backToCars', locale)}</Button>
           </Link>
         </div>
       </Section>
@@ -227,8 +234,8 @@ function BookingPageContent() {
     return (
       <Section background="primary" padding="lg">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-[var(--text)] mb-2">Select Rental Details</h1>
-          <p className="text-[var(--text-muted)] mb-8">Choose your pickup and return dates and locations.</p>
+          <h1 className="text-4xl font-bold text-[var(--text)] mb-2">{t('form.selectRentalDetails', locale)}</h1>
+          <p className="text-[var(--text-muted)] mb-8">{t('form.chooseDatesLocations', locale)}</p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Car Info Card */}
@@ -288,7 +295,7 @@ function BookingPageContent() {
 
             {/* Date Selection Form */}
             <Card>
-              <h3 className="text-xl font-semibold text-[var(--text)] mb-6">Select Rental Details</h3>
+              <h3 className="text-xl font-semibold text-[var(--text)] mb-6">{t('form.selectRentalDetails', locale)}</h3>
               <form onSubmit={handleDateSelection} className="space-y-6">
                 {dateFormError && (
                   <div className="bg-[var(--surface-2)] border border-[var(--border-strong)] text-[var(--accent)] px-4 py-3 rounded-lg text-sm">
@@ -299,7 +306,7 @@ function BookingPageContent() {
                 <div className="grid grid-cols-1 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-[var(--text)] mb-2">
-                      Pickup location
+                      {t('form.pickupLocation', locale)}
                     </label>
                     <select
                       value={selectedPickup}
@@ -314,7 +321,7 @@ function BookingPageContent() {
 
                   <div>
                     <label className="block text-sm font-medium text-[var(--text)] mb-2">
-                      Dropoff location
+                      {t('form.dropoffLocation', locale)}
                     </label>
                     <select
                       value={selectedDropoff}
@@ -331,7 +338,7 @@ function BookingPageContent() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-[var(--text)] mb-2">
-                      Pickup date
+                      {t('form.pickupDate', locale)}
                     </label>
                     <input
                       type="date"
@@ -344,7 +351,7 @@ function BookingPageContent() {
 
                   <div>
                     <label className="block text-sm font-medium text-[var(--text)] mb-2">
-                      Pickup time
+                      {t('form.pickupTime', locale)}
                     </label>
                     <input
                       type="time"
@@ -359,7 +366,7 @@ function BookingPageContent() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-[var(--text)] mb-2">
-                      Return date
+                      {t('form.returnDate', locale)}
                     </label>
                     <input
                       type="date"
@@ -425,17 +432,17 @@ function BookingPageContent() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-[var(--text)] mb-4">Booking Request Sent!</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-[var(--text)] mb-4">{t('booking.bookingRequestSent', locale)}</h1>
             <p className="text-lg text-[var(--text-muted)] mb-3">
-              Your booking request has been received successfully.
+              {t('booking.bookingRequestSent', locale)}
             </p>
             <p className="text-sm text-[var(--text-muted)] font-mono bg-[var(--surface-2)] px-4 py-2 rounded-lg inline-block">
-              Booking ID: <strong className="text-[var(--text)]">{bookingId}</strong>
+              {t('booking.bookingId', locale)} <strong className="text-[var(--text)]">{bookingId}</strong>
             </p>
           </div>
 
           <Card className="mb-6 text-left">
-            <h2 className="text-xl font-semibold text-[var(--text)] mb-4">Next Steps</h2>
+            <h2 className="text-xl font-semibold text-[var(--text)] mb-4">{t('booking.nextSteps', locale)}</h2>
             <div className="space-y-3 text-sm text-[var(--text-muted)]">
               <p>• Prepayment €100 required to confirm booking</p>
               <p>• Payment methods: Privat24 / Mono / USDT / Santander / BBVA / Caixa</p>
@@ -499,7 +506,7 @@ function BookingPageContent() {
       {/* Summary Sticky (Desktop) */}
       <div className="hidden lg:block fixed top-20 right-4 w-80 z-40">
         <Card className="sticky top-24 shadow-lg">
-          <h3 className="text-lg font-semibold text-[var(--text)] mb-4">Booking Summary</h3>
+          <h3 className="text-lg font-semibold text-[var(--text)] mb-4">{t('booking.bookingSummary', locale)}</h3>
           <div className="space-y-3 text-sm">
             <div>
               <span className="text-[var(--text-muted)]">Car:</span>
@@ -578,8 +585,8 @@ function BookingPageContent() {
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-4xl font-bold text-[var(--text)] mb-2">Complete Your Booking</h1>
-              <p className="text-[var(--text-muted)]">Please fill in your details to complete your booking request.</p>
+              <h1 className="text-4xl font-bold text-[var(--text)] mb-2">{t('booking.title', locale)}</h1>
+              <p className="text-[var(--text-muted)]">{t('booking.subtitle', locale)}</p>
             </div>
             <Button
               variant="outline"
@@ -587,13 +594,13 @@ function BookingPageContent() {
               onClick={() => setShowDateForm(true)}
               className="hidden lg:block"
             >
-              Edit dates
+              {t('booking.editDates', locale)}
             </Button>
           </div>
 
           {/* Mobile Summary */}
           <Card className="mb-8 lg:hidden">
-            <h3 className="text-lg font-semibold text-[var(--text)] mb-4">Booking Summary</h3>
+            <h3 className="text-lg font-semibold text-[var(--text)] mb-4">{t('booking.bookingSummary', locale)}</h3>
             <div className="space-y-3 text-sm">
               <div>
                 <span className="text-[var(--text-muted)]">Car:</span>
@@ -670,7 +677,7 @@ function BookingPageContent() {
               onClick={() => setShowDateForm(true)}
               className="w-full mt-4"
             >
-              Edit dates
+              {t('booking.editDates', locale)}
             </Button>
           </Card>
 
@@ -685,14 +692,14 @@ function BookingPageContent() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
-                  label="Full name"
+                  label={t('form.fullName', locale)}
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
                 />
                 <Input
-                  label="Email"
+                  label={t('form.email', locale)}
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -702,7 +709,7 @@ function BookingPageContent() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
-                  label="Phone"
+                  label={t('form.phone', locale)}
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
@@ -717,7 +724,7 @@ function BookingPageContent() {
               </div>
 
               <Input
-                label="Flight number (optional)"
+                label={t('form.flightNumberOptional', locale)}
                 type="text"
                 value={flightNumber}
                 onChange={(e) => setFlightNumber(e.target.value)}
@@ -725,7 +732,7 @@ function BookingPageContent() {
 
               {/* Extra Services */}
               <div className="pt-4 border-t border-[var(--border)]">
-                <h3 className="text-lg font-semibold text-[var(--text)] mb-4">Extra Services</h3>
+                <h3 className="text-lg font-semibold text-[var(--text)] mb-4">{t('booking.extraServices', locale)}</h3>
                 <div className="space-y-4">
                   {extras.map((extra) => {
                     const isSelected = selectedExtras.includes(extra.id);
@@ -755,15 +762,15 @@ function BookingPageContent() {
                             htmlFor={`extra-${extra.id}`} 
                             className={`text-sm font-medium cursor-pointer ${isOtherSecondDriverSelected && !isSelected ? 'text-[var(--text-muted)]' : 'text-[var(--text)]'}`}
                           >
-                            {extra.label}
-                            {extra.id === 'child_seat' && <span className="text-[var(--text-muted)] font-normal ml-2">(free)</span>}
+                            {t(`extras.${extra.id === 'child_seat' ? 'childSeat' : extra.id === 'second_driver_south' ? 'secondDriverSouth' : extra.id === 'second_driver_north' ? 'secondDriverNorth' : 'islandDelivery'}.label`, locale)}
+                            {extra.id === 'child_seat' && <span className="text-[var(--text-muted)] font-normal ml-2">{t('extras.childSeat.free', locale)}</span>}
                             {extra.id === 'island_delivery' && (
-                              <span className="text-[var(--text-muted)] font-normal ml-2">(by agreement)</span>
+                              <span className="text-[var(--text-muted)] font-normal ml-2">{t('extras.islandDelivery.byAgreement', locale)}</span>
                             )}
                           </label>
-                          <p className="text-xs text-[var(--text-muted)] mt-1">{extra.description}</p>
+                          <p className="text-xs text-[var(--text-muted)] mt-1">{t(`extras.${extra.id === 'child_seat' ? 'childSeat' : extra.id === 'second_driver_south' ? 'secondDriverSouth' : extra.id === 'second_driver_north' ? 'secondDriverNorth' : 'islandDelivery'}.description`, locale)}</p>
                           {extra.id === 'island_delivery' && isSelected && (
-                            <Badge variant="outline" className="text-xs mt-2">We will confirm the price on WhatsApp</Badge>
+                            <Badge variant="outline" className="text-xs mt-2">{t('extras.islandDelivery.confirmPrice', locale)}</Badge>
                           )}
                         </div>
                       </div>
@@ -788,13 +795,13 @@ function BookingPageContent() {
                     required
                   />
                   <label htmlFor="acceptTerms" className="text-sm text-[var(--text)] flex-1">
-                    I accept the rental terms and conditions{' '}
+                    {t('booking.acceptTerms', locale)}{' '}
                     <button
                       type="button"
                       onClick={() => setShowTermsModal(true)}
                       className="text-[var(--text)] underline hover:text-[var(--accent-hover)] transition-colors font-medium"
                     >
-                      (View terms)
+                      {t('booking.viewTerms', locale)}
                     </button>
                   </label>
                 </div>
@@ -902,7 +909,7 @@ function BookingPageContent() {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            Download PDF
+            {t('booking.downloadPdf', locale)}
           </a>
         }
       >
@@ -970,16 +977,16 @@ function BookingPageContent() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-[var(--text)] mb-3">Payment Methods</h3>
+              <h3 className="text-lg font-semibold text-[var(--text)] mb-3">{t('payment.methodsTitle', locale)}</h3>
               <p>
-                We accept Privat24, Mono, USDT, Santander, BBVA, and Caixa. Apple Pay link available on request.
+                {t('payment.methodsDescription', locale)}
               </p>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold text-[var(--text)] mb-3">Contact</h3>
               <p>
-                For any questions or special requests, please contact us on WhatsApp:{' '}
+                {t('booking.contactWhatsApp', locale)}{' '}
                 <a href="https://wa.me/34692735125" className="text-[var(--text)] underline">+34 692 735 125</a>
               </p>
             </div>

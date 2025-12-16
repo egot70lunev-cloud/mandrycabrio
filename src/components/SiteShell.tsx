@@ -25,3 +25,4 @@ export function SiteShell({ children, locale = 'en' }: SiteShellProps) {
   );
 }
 
+

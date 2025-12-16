@@ -8,3 +8,4 @@ export default function BookingLayout({
   return <>{children}</>;
 }
 
+

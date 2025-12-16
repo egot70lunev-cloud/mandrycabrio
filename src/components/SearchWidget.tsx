@@ -4,24 +4,29 @@ import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Select, Button } from './ui';
 import type { CarCategory } from '@/data/cars';
+import { t, getLocaleFromPathname, type Locale } from '@/lib/i18n';
 
-const locations = [
-  { value: 'north-airport-tfn', label: 'North Airport (TFN)' },
-  { value: 'south-airport-tfs', label: 'South Airport (TFS)' },
-  { value: 'puerto-de-la-cruz', label: 'Puerto de la Cruz' },
-  { value: 'santa-cruz', label: 'Santa Cruz' },
-  { value: 'los-cristianos', label: 'Los Cristianos' },
-  { value: 'other', label: 'Other (by agreement)' },
-];
+function getLocations(locale: Locale): Array<{ value: string; label: string }> {
+  return [
+    { value: 'north-airport-tfn', label: t('locations.northAirportTfn', locale) },
+    { value: 'south-airport-tfs', label: t('locations.southAirportTfs', locale) },
+    { value: 'puerto-de-la-cruz', label: t('locations.puertoDeLaCruz', locale) },
+    { value: 'santa-cruz', label: t('locations.santaCruz', locale) },
+    { value: 'los-cristianos', label: t('locations.losCristianos', locale) },
+    { value: 'other', label: t('locations.other', locale) },
+  ];
+}
 
-const categories: Array<{ value: CarCategory | 'any'; label: string }> = [
-  { value: 'any', label: 'Any' },
-  { value: 'cabrio', label: 'Cabrio' },
-  { value: 'suv', label: 'SUV' },
-  { value: 'economy', label: 'Economy' },
-  { value: 'ev', label: 'EV' },
-  { value: 'motorcycle', label: 'Motorcycle' },
-];
+function getCategories(locale: Locale): Array<{ value: CarCategory | 'any'; label: string }> {
+  return [
+    { value: 'any', label: t('form.any', locale) },
+    { value: 'cabrio', label: t('cars.category.cabrio', locale) },
+    { value: 'suv', label: t('cars.category.suv', locale) },
+    { value: 'economy', label: t('cars.category.economy', locale) },
+    { value: 'ev', label: t('cars.category.ev', locale) },
+    { value: 'motorcycle', label: t('cars.category.motorcycle', locale) },
+  ];
+}
 
 function getDefaultDateTime(daysOffset: number): { date: string; time: string } {
   const date = new Date();
@@ -40,7 +45,7 @@ function SearchWidgetContent() {
   const pathname = usePathname();
   
   // Detect locale from pathname
-  const locale = pathname.startsWith('/es') ? 'es' : 'en';
+  const locale = getLocaleFromPathname(pathname);
   
   // Initialize from URL params or defaults
   const [pickupLocation, setPickupLocation] = useState(
@@ -90,7 +95,7 @@ function SearchWidgetContent() {
 
     // Validation
     if (returnDateTime <= pickupDateTime) {
-      setError('Return date and time must be after pickup date and time');
+      setError(t('form.returnAfterPickup', locale));
       return;
     }
 
@@ -106,10 +111,13 @@ function SearchWidgetContent() {
     router.push(`/${locale}/search?${params.toString()}`);
   };
 
+  const locations = getLocations(locale);
+  const categories = getCategories(locale);
+
   return (
     <div className="bg-transparent">
       <h2 className="text-2xl md:text-3xl font-bold text-[var(--text)] mb-6">
-        Search your Car
+        {t('search.title', locale)}
       </h2>
       
       <form onSubmit={handleSearch} className="space-y-6">
@@ -124,7 +132,7 @@ function SearchWidgetContent() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Pickup Location */}
           <Select
-            label="Pickup location"
+            label={t('form.pickupLocation', locale)}
             options={locations}
             value={pickupLocation}
             onChange={(e) => setPickupLocation(e.target.value)}
@@ -132,7 +140,7 @@ function SearchWidgetContent() {
 
           {/* Dropoff Location */}
           <Select
-            label="Dropoff location"
+            label={t('form.dropoffLocation', locale)}
             options={locations}
             value={dropoffLocation}
             onChange={(e) => setDropoffLocation(e.target.value)}
@@ -141,7 +149,7 @@ function SearchWidgetContent() {
           {/* Pickup Date */}
           <div>
             <label className="block text-sm font-medium text-[var(--text)] mb-2">
-              Pickup date
+              {t('form.pickupDate', locale)}
             </label>
             <input
               type="date"
@@ -155,7 +163,7 @@ function SearchWidgetContent() {
           {/* Pickup Time */}
           <div>
             <label className="block text-sm font-medium text-[var(--text)] mb-2">
-              Pickup time
+              {t('form.pickupTime', locale)}
             </label>
             <input
               type="time"
@@ -169,7 +177,7 @@ function SearchWidgetContent() {
           {/* Return Date */}
           <div>
             <label className="block text-sm font-medium text-[var(--text)] mb-2">
-              Return date
+              {t('form.returnDate', locale)}
             </label>
             <input
               type="date"
@@ -183,7 +191,7 @@ function SearchWidgetContent() {
           {/* Return Time */}
           <div>
             <label className="block text-sm font-medium text-[var(--text)] mb-2">
-              Return time
+              {t('form.returnTime', locale)}
             </label>
             <input
               type="time"
@@ -197,7 +205,7 @@ function SearchWidgetContent() {
           {/* Category */}
           <div className="md:col-span-2">
             <Select
-              label="Category"
+              label={t('form.category', locale)}
               options={categories}
               value={category}
               onChange={(e) => setCategory(e.target.value as CarCategory | 'any')}
@@ -212,7 +220,7 @@ function SearchWidgetContent() {
           size="lg"
           className="w-full"
         >
-          Search
+          {t('form.search', locale)}
         </Button>
       </form>
     </div>
@@ -224,9 +232,9 @@ export function SearchWidget() {
     <Suspense fallback={
       <div className="bg-[var(--surface)] rounded-xl p-6 md:p-8 border border-[var(--border)]">
         <h2 className="text-2xl md:text-3xl font-bold text-[var(--text)] mb-6">
-          Search your Car
+          {t('search.title', 'en')}
         </h2>
-        <div className="text-[var(--text-muted)]">Loading...</div>
+        <div className="text-[var(--text-muted)]">{t('form.loading', 'en')}</div>
       </div>
     }>
       <SearchWidgetContent />

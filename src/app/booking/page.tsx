@@ -437,8 +437,8 @@ function BookingPageContent() {
             <h2 className="text-xl font-semibold text-[var(--text)] mb-4">Next Steps</h2>
             <div className="space-y-3 text-sm text-[var(--text-muted)]">
               <p>• Prepayment €100 required to confirm booking</p>
-              <p>• Payment methods: Privat24 / Mono / USDT / Santander / BBVA / Caixa</p>
-              <p>• Apple Pay link available on request</p>
+              <p>• {t('payment.methodsList', locale)}</p>
+              <p>• {t('payment.applePayNote', locale)}</p>
               <p>• Rental payment + deposit on pickup</p>
             </div>
           </Card>

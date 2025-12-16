@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 import { cars } from '@/data/cars';
 import { calcTotalPrice } from '@/lib/pricing';
@@ -13,25 +13,32 @@ import { Section, Card, Button, Input, Badge } from '@/components/ui';
 import { Modal } from '@/components/ui/Modal';
 import Link from 'next/link';
 import type { Car } from '@/data/cars';
+import { t, getLocaleFromPathname } from '@/lib/i18n';
 // Note: Metadata for client components is handled via layout.tsx or parent server component
 
-const locationLabels: Record<string, string> = {
-  'north-airport-tfn': 'Aeropuerto Norte (TFN)',
-  'south-airport-tfs': 'Aeropuerto Sur (TFS)',
-  'puerto-de-la-cruz': 'Puerto de la Cruz',
-  'santa-cruz': 'Santa Cruz',
-  'los-cristianos': 'Los Cristianos',
-  'other': 'Otro (bajo acuerdo)',
-};
+function getLocationLabels(locale: string): Record<string, string> {
+  return {
+    'north-airport-tfn': t('locations.northAirportTfn', locale),
+    'south-airport-tfs': t('locations.southAirportTfs', locale),
+    'puerto-de-la-cruz': t('locations.puertoDeLaCruz', locale),
+    'santa-cruz': t('locations.santaCruz', locale),
+    'los-cristianos': t('locations.losCristianos', locale),
+    'other': t('locations.other', locale),
+  };
+}
 
 type BookingState = 'idle' | 'loading' | 'success' | 'error';
 
 function BookingPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   
   const query = parseBookingQuery(Object.fromEntries(searchParams.entries()));
   const isComplete = isCompleteBookingQuery(query);
+  
+  const locationLabels = getLocationLabels(locale);
 
   const [car, setCar] = useState<Car | null>(null);
   const [pricing, setPricing] = useState<ReturnType<typeof calcTotalPrice> | null>(null);
@@ -438,8 +445,8 @@ function BookingPageContent() {
             <h2 className="text-xl font-semibold text-[var(--text)] mb-4">Próximos Pasos</h2>
             <div className="space-y-3 text-sm text-[var(--text-muted)]">
               <p>• Anticipo de €100 requerido para confirmar la reserva</p>
-              <p>• Métodos de pago: Privat24 / Mono / USDT / Santander / BBVA / Caixa</p>
-              <p>• Enlace de Apple Pay disponible bajo solicitud</p>
+              <p>• {t('payment.methodsList', locale)}</p>
+              <p>• {t('payment.applePayNote', locale)}</p>
               <p>• Pago del alquiler + depósito en la recogida</p>
             </div>
           </Card>

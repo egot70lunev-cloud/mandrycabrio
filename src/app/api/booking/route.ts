@@ -6,7 +6,8 @@ import { calcTotalPrice } from '@/lib/pricing';
 import { calcExtras, type ExtrasSummary } from '@/lib/extras';
 import { sendClientEmail, sendAdminEmail, type SendEmailResult } from '@/lib/email';
 import { buildAdminWhatsAppMessage, buildClientWhatsAppLink, sendWhatsAppAdmin } from '@/lib/whatsapp';
-import { createCalendarEvent } from '@/lib/calendar';
+import { createBookingEvent } from '@/lib/googleCalendar';
+import { formatEUR } from '@/lib/format';
 import { BookingStatus } from '@prisma/client';
 import type { ExtraId } from '@/data/extras';
 
@@ -118,8 +119,10 @@ export async function POST(request: NextRequest) {
     const extrasSummary = calcExtras(selectedExtras);
     const totalEstimateFinal = (pricingSummary.total || 0) + extrasSummary.extrasTotal;
 
-    // Create booking in database
-    const booking = await prisma.booking.create({
+    // Create booking in database (with error handling)
+    let booking;
+    try {
+      booking = await prisma.booking.create({
       data: {
         carSlug: body.carSlug,
         startAt,
@@ -136,6 +139,13 @@ export async function POST(request: NextRequest) {
         status: BookingStatus.PENDING,
       },
     });
+    } catch (dbError) {
+      console.error('[BOOKING] Database error:', dbError);
+      return NextResponse.json(
+        { ok: false, error: 'Failed to create booking in database' },
+        { status: 500 }
+      );
+    }
 
     // Side effects (non-blocking, don't fail booking if these fail)
     let clientEmailResult: SendEmailResult | null = null;
@@ -192,28 +202,58 @@ export async function POST(request: NextRequest) {
       console.error('[BOOKING] WhatsApp error (non-blocking):', whatsappError);
     }
 
+    // Create Google Calendar event (non-blocking for booking flow)
+    let calendarResult: { ok: boolean; eventId?: string; htmlLink?: string; error?: string } | null = null;
     try {
-      // Create Google Calendar event
-      await createCalendarEvent({
+      // Log calendar creation start
+      console.log('CALENDAR_CREATE_START', { calendarId: process.env.GOOGLE_CALENDAR_ID || process.env.CALENDAR_ID });
+
+      // Build location labels
+      const locationLabels: Record<string, string> = {
+        'north-airport-tfn': 'North Airport (TFN)',
+        'south-airport-tfs': 'South Airport (TFS)',
+        'puerto-de-la-cruz': 'Puerto de la Cruz',
+        'santa-cruz': 'Santa Cruz',
+        'los-cristianos': 'Los Cristianos',
+        'other': 'Other (by agreement)',
+      };
+
+      const pickupLabel = locationLabels[body.pickupLocation] || body.pickupLocation;
+      const dropoffLabel = locationLabels[body.dropoffLocation] || body.dropoffLocation;
+
+      // Create calendar event with specified format
+      calendarResult = await createBookingEvent({
         bookingId: booking.id,
         carName: car.name,
-        fromISO: body.startAt,
-        toISO: body.endAt,
-        pickup: body.pickupLocation,
-        dropoff: body.dropoffLocation,
-        clientName: booking.name,
-        clientEmail: booking.email,
-        clientPhone: booking.phone,
+        customerName: booking.name,
+        customerPhone: booking.phone,
+        pickupLocation: pickupLabel,
+        dropoffLocation: dropoffLabel,
         deposit: car.deposit,
         total: totalEstimateFinal > 0 ? totalEstimateFinal : pricingSummary.total,
-        status: booking.status as 'PENDING' | 'CONFIRMED',
-        extrasSummary: extrasSummary.items.length > 0 ? {
-          items: extrasSummary.items.map(item => ({ id: item.id, label: item.label, price: item.price })),
-          extrasTotal: extrasSummary.extrasTotal,
-          hasByAgreement: extrasSummary.hasByAgreement,
-        } : undefined,
+        notes: booking.flightNumber ? `Flight: ${booking.flightNumber}` : undefined,
+        startISO: body.startAt,
+        endISO: body.endAt,
       });
+
+      // Update booking with calendar event info if successful
+      if (calendarResult.ok && (calendarResult.eventId || calendarResult.htmlLink)) {
+        // Log success
+        console.log('CALENDAR_CREATE_OK', { eventId: calendarResult.eventId, htmlLink: calendarResult.htmlLink });
+        
+        await prisma.booking.update({
+          where: { id: booking.id },
+          data: {
+            calendarEventId: calendarResult.eventId,
+            calendarEventLink: calendarResult.htmlLink,
+          },
+        });
+      } else if (!calendarResult.ok) {
+        console.error('[BOOKING] Calendar event creation failed:', calendarResult.error);
+      }
     } catch (calendarError) {
+      // Non-blocking: log error but don't fail the booking
+      console.error('CALENDAR_CREATE_FAIL', calendarError);
       console.error('[BOOKING] Google Calendar error (non-blocking):', calendarError);
     }
 
@@ -238,6 +278,10 @@ export async function POST(request: NextRequest) {
         totalEstimateFinal: totalEstimateFinal > 0 ? totalEstimateFinal : pricingSummary.total,
         extras: extrasSummary.items.length > 0 ? extrasSummary.items : [],
       },
+      calendar: calendarResult?.ok ? {
+        eventId: calendarResult.eventId,
+        htmlLink: calendarResult.htmlLink,
+      } : undefined,
     };
 
     if (process.env.NODE_ENV !== 'production') {

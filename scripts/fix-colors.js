@@ -65,3 +65,4 @@ walkDir(appDir);
 
 console.log('Color replacement complete!');
 
+

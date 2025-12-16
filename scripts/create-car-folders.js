@@ -51,3 +51,4 @@ console.log(`📝 Next step: Add images (1.jpg, 2.jpg, etc.) to each folder`);
 
 
 
+

@@ -22,6 +22,8 @@ model Booking {
   extrasJson      String?       // JSON string of selected extras and pricing
   extrasTotal     Int?          // Total price of extras (null if by agreement)
   status          BookingStatus @default(PENDING)
+  calendarEventId   String?
+  calendarEventLink String?
   createdAt       DateTime      @default(now())
 
   @@index([carSlug])

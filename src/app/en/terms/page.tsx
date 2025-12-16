@@ -1,6 +1,7 @@
 import { Section, Card } from '@/components/ui';
 import { generatePageMetadata } from '../../metadata';
 import type { Metadata } from 'next';
+import { t } from '@/lib/i18n';
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Terms & Conditions | MandryCabrio',
@@ -10,6 +11,7 @@ export const metadata: Metadata = generatePageMetadata({
 });
 
 export default function TermsPage() {
+  const locale = 'en';
   return (
     <Section background="primary" padding="lg">
       <div className="max-w-4xl mx-auto">
@@ -70,9 +72,9 @@ export default function TermsPage() {
           </Card>
 
           <Card>
-            <h2 className="text-2xl font-semibold text-[#2B2B2B] mb-4">Payment Methods</h2>
+            <h2 className="text-2xl font-semibold text-[#2B2B2B] mb-4">{t('payment.methodsTitle', locale)}</h2>
             <p className="text-[#6B6B6B]">
-              We accept Privat24, Mono, USDT, Santander, BBVA, and Caixa. Apple Pay link available on request.
+              {t('payment.methodsDescription', locale)}
             </p>
           </Card>
 

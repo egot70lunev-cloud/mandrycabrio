@@ -13,29 +13,151 @@
     "title": "Alquiler de Coches Premium en Tenerife",
     "subtitle": "Disfruta del alquiler de coches de lujo con nuestra colección premium",
     "browseCars": "Ver Coches",
-    "learnMore": "Saber Más"
+    "learnMore": "Saber Más",
+    "availableViaWhatsApp": "Disponible por WhatsApp para cualquier asistencia"
   },
   "cars": {
     "title": "Nuestra Flota",
     "subtitle": "Descubre nuestra colección premium",
     "viewDetails": "Ver detalles",
-    "book": "Reservar"
+    "book": "Reservar",
+    "category": {
+      "all": "Todos",
+      "cabrio": "Cabrio",
+      "suv": "SUV",
+      "economy": "Económico",
+      "ev": "Eléctrico",
+      "motorcycle": "Motocicleta",
+      "luxury": "Lujo"
+    },
+    "sort": {
+      "recommended": "Recomendado",
+      "priceLow": "Precio (menor a mayor)",
+      "priceHigh": "Precio (mayor a menor)",
+      "depositLow": "Depósito (menor a mayor)"
+    }
+  },
+  "search": {
+    "title": "Busca tu Coche",
+    "resultsTitle": "Resultados de Búsqueda",
+    "noResults": "No hay coches disponibles para estas fechas.",
+    "editSearch": "Modificar búsqueda",
+    "backToSearch": "Volver a búsqueda",
+    "modifySearch": "Modificar búsqueda",
+    "invalidDates": "Fechas inválidas. Por favor, verifica tus parámetros de búsqueda.",
+    "invalidParams": "Parámetros de búsqueda inválidos",
+    "category": "Categoría",
+    "summary": "Resumen de Búsqueda"
+  },
+  "form": {
+    "pickupLocation": "Lugar de recogida",
+    "dropoffLocation": "Lugar de devolución",
+    "pickupDate": "Fecha de recogida",
+    "pickupTime": "Hora de recogida",
+    "returnDate": "Fecha de devolución",
+    "returnTime": "Hora de devolución",
+    "category": "Categoría",
+    "any": "Cualquiera",
+    "search": "Buscar",
+    "selectBothDates": "Por favor, selecciona ambas fechas de recogida y devolución",
+    "invalidDateFormat": "Formato de fecha inválido",
+    "returnAfterPickup": "La fecha y hora de devolución deben ser posteriores a la fecha y hora de recogida",
+    "fullName": "Nombre completo",
+    "email": "Email",
+    "phone": "Teléfono",
+    "whatsappOptional": "WhatsApp (opcional)",
+    "flightNumberOptional": "Número de vuelo (opcional)",
+    "submit": "Enviar",
+    "loading": "Cargando...",
+    "selectRentalDetails": "Selecciona los Detalles del Alquiler",
+    "chooseDatesLocations": "Elige las fechas y ubicaciones de recogida y devolución."
   },
   "booking": {
     "title": "Completa Tu Reserva",
-    "subtitle": "Rellena tus datos para completar tu solicitud de reserva"
-  },
-  "search": {
-    "title": "Resultados de Búsqueda",
-    "noResults": "No hay coches disponibles para estas fechas.",
-    "editSearch": "Modificar búsqueda",
+    "subtitle": "Por favor, rellena tus datos para completar tu solicitud de reserva.",
+    "selectRentalDetails": "Selecciona los Detalles del Alquiler",
+    "chooseDatesLocations": "Elige las fechas y ubicaciones de recogida y devolución.",
+    "pricing": "Precios:",
+    "deposit": "Depósito:",
+    "bookingSummary": "Resumen de Reserva",
+    "car": "Coche:",
+    "dates": "Fechas:",
+    "pickup": "Recogida:",
+    "dropoff": "Devolución:",
+    "days": "día",
+    "daysPlural": "días",
+    "extras": "Extras:",
+    "extrasTotal": "Total extras:",
+    "rentalTotal": "Total alquiler:",
+    "totalInclExtras": "Total (incl. extras):",
+    "extraServices": "Servicios Adicionales",
+    "acceptTerms": "Acepto los términos y condiciones de alquiler",
+    "viewTerms": "(Ver términos)",
+    "whatYouAgree": "Lo que aceptas (resumen)",
+    "downloadPdf": "Descargar PDF",
+    "editDates": "Editar fechas",
+    "noCarSelected": "No se ha seleccionado ningún coche",
+    "selectCarToStart": "Por favor, selecciona un coche para comenzar tu reserva.",
+    "backToCars": "Volver a coches",
+    "carNotFound": "Coche no encontrado",
+    "bookingRequestSent": "¡Solicitud de Reserva Enviada!",
+    "bookingId": "ID de reserva:",
+    "nextSteps": "Próximos Pasos",
+    "contactWhatsApp": "Para cualquier pregunta o solicitud especial, contáctanos por WhatsApp:",
     "backToSearch": "Volver a búsqueda"
+  },
+  "extras": {
+    "childSeat": {
+      "label": "Silla de niño / moisés / elevador",
+      "description": "Silla de niño, moisés o elevador gratuito para tu alquiler",
+      "free": "(gratis)"
+    },
+    "secondDriverSouth": {
+      "label": "Segundo conductor — Sur (€30)",
+      "description": "Autorización de conductor adicional para zona Sur (Aeropuerto Sur TFS, Los Cristianos)"
+    },
+    "secondDriverNorth": {
+      "label": "Segundo conductor — Norte (€80)",
+      "description": "Autorización de conductor adicional para zona Norte (Aeropuerto Norte TFN, Puerto de la Cruz, Santa Cruz)"
+    },
+    "islandDelivery": {
+      "label": "Entrega / recogida en toda la isla",
+      "description": "Servicio de entrega y recogida en toda Tenerife (bajo acuerdo)",
+      "byAgreement": "(bajo acuerdo)",
+      "confirmPrice": "Confirmaremos el precio por WhatsApp"
+    }
+  },
+  "locations": {
+    "northAirportTfn": "Aeropuerto Norte (TFN)",
+    "southAirportTfs": "Aeropuerto Sur (TFS)",
+    "puertoDeLaCruz": "Puerto de la Cruz",
+    "santaCruz": "Santa Cruz",
+    "losCristianos": "Los Cristianos",
+    "other": "Otro (bajo acuerdo)"
   },
   "terms": {
     "title": "Términos y Condiciones",
     "description": "Términos y condiciones de alquiler de MandryCabrio en Tenerife. Lee nuestras políticas sobre depósitos, seguros y servicios adicionales."
+  },
+  "payment": {
+    "title": "Métodos de Pago Aceptados",
+    "description": "Para confirmar una reserva, se requiere un prepago de €100. El resto de la tarifa de alquiler y el depósito se pagan al recoger el vehículo.",
+    "descriptionCompact": "Para confirmar tu reserva, se requiere un prepago de €100. El resto de la tarifa de alquiler y el depósito se pagan al recoger el vehículo.",
+    "methodsTitle": "Métodos de Pago",
+    "methodsDescription": "Aceptamos Privat24, Mono, USDT, Santander, BBVA y Caixa. Enlace de Apple Pay disponible bajo solicitud.",
+    "methodsList": "Métodos de pago: Privat24 / Mono / USDT / Santander / BBVA / Caixa",
+    "applePayNote": "Enlace de Apple Pay disponible bajo solicitud",
+    "methods": {
+      "cash": "Efectivo",
+      "cashOnPickup": "(al recoger)",
+      "bankTransfer": "Transferencia Bancaria",
+      "bankTransferBanks": "(Santander / BBVA / Caixa)",
+      "usdt": "USDT",
+      "usdtCrypto": "(cripto)",
+      "privat24Monobank": "Privat24 / Monobank",
+      "privat24MonobankUah": "(UAH)",
+      "applePay": "Apple Pay",
+      "applePayOnRequest": "(bajo solicitud)"
+    }
   }
 }
-
-
-

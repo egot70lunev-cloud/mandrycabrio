@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0",
+    "dev": "powershell -ExecutionPolicy Bypass -File scripts/ensure-prisma.ps1 && next dev --webpack",
+    "dev:clean": "rmdir /s /q .next 2>nul & npm run dev",
+    "dev:safe": "taskkill /F /IM node.exe 2>nul & timeout /t 1 /nobreak >nul & npx prisma generate && npm run dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "postinstall": "prisma generate",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -22,14 +27,14 @@
     "resend": "^6.6.0"
   },
   "devDependencies": {
-    "@prisma/client": "^6.1.0",
+    "@prisma/client": "^6.19.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
-    "prisma": "^6.1.0",
+    "prisma": "^6.19.1",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"
